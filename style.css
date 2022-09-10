@@ -17,3 +17,27 @@ h1 {
     background-color: var(--darkblue);
     color: var(--palepurplebrown);
 }
+
+/* Media screens! */
+@media screen and (max-width: 992px) {
+    h1 {
+        background-color: var(--lightbrick);
+        color: var(--lightgraywhite)
+    }
+  }
+  
+  /* Large smartphones */
+  @media screen and (max-width: 768px) {
+    h1 {
+      background-color: var(--lightgraywhite);
+      color: var(--darkblue);
+    }
+  }
+  
+  /* Small smartphones */
+  @media screen and (max-width: 576px) {
+    h1 {
+      background-color: var(--palepurplebrown);
+      color: var(--lightbrick);
+    }
+  }
