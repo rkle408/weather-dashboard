@@ -1,0 +1,2 @@
+// Test connection:
+// alert("hello");
