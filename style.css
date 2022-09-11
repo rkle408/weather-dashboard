@@ -7,35 +7,48 @@
 }
 
 * {
-    background-color: var(--paletan);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+header {
+    text-align: center;
+    background-color: var(--darkblue);
+    color: var(--palepurplebrown);
+    padding: 2px;
+    border-radius: 5px;
 }
 
 h1 {
     font-size: 50px;
-    text-align: center;
-    background-color: var(--darkblue);
-    color: var(--palepurplebrown);
     font-family: 'Dancing Script', cursive;
+}
+
+.timeNow {
+    font-size: 25px;
 }
 
 .sidebar {
     margin: 10px;
     padding: 10px;
-    width: 400px;
+    width: 350px;
     background-color: var(--lightgraywhite);
     position: fixed;
     height: 80%;
     overflow: auto;
     border-radius: 5px;
-  }
+    line-height: 40px;
+}
 
 main {
-    margin-left: 200px;
-    padding: 1px 16px;
+    margin: 10px;
+    padding: 10px;
+    margin-left: 400px;
+    padding: 2px 16px;
     height: 1000px;
-  }
+    border-radius: 5px;
+    background-color: var(--paletan);
+}
 
 input {
     border-radius: 7px;
