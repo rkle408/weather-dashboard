@@ -15,6 +15,7 @@ var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
+var weatherData = $('.weather');
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -28,6 +29,20 @@ setInterval(displayTime, 1000);
 
 // Search button saves to local storage
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
+searchButton.on('click', function (event) { 
+    event.preventDefault();
+
+    console.log(userCities.val());
+    localStorage.setItem("searchedCity", userCities.val());
+    
+    // Need to make sure API is fetched
+    getCityData(userCities);
+});
+
+var storedCities = localStorage.getItem("searchedCity");
+searchHistory.text(storedCities);
+
+
 
 // Need function to get the weather and to display data:
 function getCityData() {
@@ -43,18 +58,9 @@ function getCityData() {
         // Need to convert
         .then(function (data) {
             console.log(data);
+            var city = $('<h2>');  
+            city.text(data.name);
+            weatherData.append(city);
         });
     };
 
-searchButton.on('click', function (event) { 
-    event.preventDefault();
-
-    console.log(userCities.val());
-    localStorage.setItem("searchedCity", userCities.val());
-    
-    // Need to make sure API is fetched
-    getCityData(userCities);
-});
-
-var storedCities = localStorage.getItem("searchedCity");
-searchHistory.text(storedCities);
