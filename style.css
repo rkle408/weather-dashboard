@@ -16,6 +16,7 @@ h1 {
     text-align: center;
     background-color: var(--darkblue);
     color: var(--palepurplebrown);
+    font-family: 'Dancing Script', cursive;
 }
 
 /* Media screens! */
