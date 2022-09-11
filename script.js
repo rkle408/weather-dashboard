@@ -12,6 +12,7 @@
 var timeEl = $('.timeNow');
 var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
+var searchHistory= $('#searchHistoryList');
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -23,12 +24,17 @@ function displayTime () {
 // Declare time function
 setInterval(displayTime, 1000);
 
+// Search button saves to local storage
+// NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
 searchButton.on('click', function (event) { 
     event.preventDefault();
 
     console.log(userCities.val());
     localStorage.setItem("searchedCity", userCities.val());
 });
+
+var storedCities = localStorage.getItem("searchedCity");
+searchHistory.text(storedCities);
 
 // link API using
 var openWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={90f20119a63b80bc6e3ec3b202bae4ee}";
