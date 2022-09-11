@@ -14,7 +14,7 @@ var timeEl = $('.timeNow');
 var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
-var cityName = $('city-name')
+var cityName = $('#city-name')
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -39,7 +39,7 @@ var storedCities = localStorage.getItem("searchedCity");
 searchHistory.text(storedCities);
 
 // Need function to get the weather and to display data:
-    var openWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=90f20119a63b80bc6e3ec3b202bae4ee";
+    var openWeatherUrl = "90f20119a63b80bc6e3ec3b202bae4ee";
 
     // Need to figure out how to get uer's desired input in the lat and long in the URL above
 
