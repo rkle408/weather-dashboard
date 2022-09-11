@@ -24,6 +24,11 @@ h1 {
     font-family: 'Dancing Script', cursive;
 }
 
+h2 {
+    font-size: 25px;
+    font-weight: normal;
+}
+
 .timeNow {
     font-size: 25px;
 }
@@ -33,8 +38,8 @@ h1 {
     padding: 10px;
     width: 350px;
     background-color: var(--lightgraywhite);
-    position: fixed;
-    height: 80%;
+    position: absolute;
+    height: 100%;
     overflow: auto;
     border-radius: 5px;
     line-height: 40px;
@@ -54,9 +59,20 @@ input {
     border-radius: 7px;
 }
 
-#citySearchButton {
+button,
+input {
+    width: 330px;
+}
+
+button {
     border-radius: 20px;
- }
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--lightbrick);
+    transition: 0.5s;
+}
 
 /* Media screens! */
 @media screen and (max-width: 992px) {

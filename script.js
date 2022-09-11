@@ -4,11 +4,13 @@
 // TO DO:
 // Need to fetch weather API
 // Need to do local storage for user's search history
-// Need a search bar
+// Need a functional search bar
 // Need list of city history
+// Create buttons for previous cities in .searchHistoryList
 
 // Add time to header
 var timeEl = $('.timeNow');
+var userCities = $('.citySearch');
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -35,3 +37,4 @@ fetch(openWeatherUrl)
       .then(function (data) {
         console.log(data)
       });
+
