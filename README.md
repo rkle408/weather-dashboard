@@ -3,6 +3,8 @@
 ##
 
 
+### Special Notes:
+Had to change the API key after commit #20 due to not being in .gitignore, and they did require a credit card for One Call 3.0 subscription.
 
 ### Deploy website: <https://rkle408.github.io/weather-dashboard/>
 

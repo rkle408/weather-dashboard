@@ -50,7 +50,7 @@ searchHistory.text(storedCities);
 
 //Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
-    var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid=90f20119a63b80bc6e3ec3b202bae4ee";
+    var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid="+API_key;
 
     // Fetch API using the browswer fetch method (no need to worry about linking jquery with AJAX)
     fetch(openWeatherUrl)
@@ -78,7 +78,7 @@ function getCityData() {
 
 //Call from the correct One Call API!! 
 function getOneCall (latitude, longitude) {
-    var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid=90f20119a63b80bc6e3ec3b202bae4ee";
+    var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid="+API_key;
                 
         fetch(oneCallUrl)
             .then(function (response) {
@@ -86,11 +86,11 @@ function getOneCall (latitude, longitude) {
             })
             .then(function (data) {
                 console.log(data);
-                // // forloop to get daily here
-                // for (i=0; i < data.length; i++) {
-                //     var _____Data = $('<h2>');
-                //     _____Data.textContent = data[0].daily[0];
-                //     weatherData.append(___ata);
-                // }
+                // forloop to get info here
+                for (i=0; i < data.length; i++) {
+                    var temperatureData = $('<h2>');
+                    temperatureData.textContent = "Temperature:" + data[0].current[3].daily[0];
+                    weatherData.append(temperatureData);
+                }
             });
 };
