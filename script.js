@@ -16,6 +16,8 @@ var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
 var weatherData = $('.weather');
+var lat = $('#lat');
+var long = $('#long');
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -27,6 +29,8 @@ function displayTime () {
 // Declare time function
 setInterval(displayTime, 1000);
 
+var stored
+
 // Search button saves to local storage
 searchButton.on('click', function (event) { 
     event.preventDefault();
@@ -35,7 +39,7 @@ searchButton.on('click', function (event) {
     localStorage.setItem("searchedCity", userCities.val());
     
     // Need to make sure API is fetched
-    getCityData(userCities);
+    getCityData();
 });
 
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
@@ -46,8 +50,11 @@ searchHistory.text(storedCities);
 
 
 // Need function to get the weather and to display data:
+
+
+//Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
-    var openWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?q="+userCities.val()+"&appid=90f20119a63b80bc6e3ec3b202bae4ee";
+    var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid=90f20119a63b80bc6e3ec3b202bae4ee";
 
     // Need to figure out how to get user's desired input in the lat and long in the URL above
 
@@ -59,32 +66,27 @@ function getCityData() {
         // Need to convert
         .then(function (data) {
             console.log(data);
-            var city = $('<h2>');  
-            city.text(data.name);
-            weatherData.append(city);
+   
+         localStorage.setItem("lat", data[0].lat);
+         localStorage.setItem("lon", data[0].lon);
 
-            // var long = $('<p>');
-            // long.text(data.coord.lon);
-            // weatherData.append(long);
 
-            // var lat = $('<p>');
-            // lat.text(data.coord.lat);
-            // weatherData.append(lat);     
-            
-            //Call from the correct API??
-            function getOneCall () {
-                var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+data.coord.lat+"&lon="+data.coord.lon+"&units=imperial&appid=90f20119a63b80bc6e3ec3b202bae4ee";
-            
-                fetch(oneCallUrl)
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (data) {
-                        console.log(data);
-                    });
-            }
             getOneCall();
         });
-    };
+};
 
-    
+var storedLat = localStorage.getItem("lat");
+var storedLon = localStorage.getItem("lon");
+
+//Call from the correct API??
+function getOneCall () {
+    var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+storedLat+"&lon="+storedLon+"&units=imperial&appid=91f1fde1227ae1ecc713be6b6595cdb2";
+                
+        fetch(oneCallUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+            });
+}
