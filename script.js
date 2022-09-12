@@ -28,7 +28,6 @@ function displayTime () {
 setInterval(displayTime, 1000);
 
 // Search button saves to local storage
-// NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
 searchButton.on('click', function (event) { 
     event.preventDefault();
 
@@ -39,6 +38,8 @@ searchButton.on('click', function (event) {
     getCityData(userCities);
 });
 
+// NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
+// Display past searches
 var storedCities = localStorage.getItem("searchedCity");
 searchHistory.text(storedCities);
 
@@ -61,6 +62,29 @@ function getCityData() {
             var city = $('<h2>');  
             city.text(data.name);
             weatherData.append(city);
+
+            // var long = $('<p>');
+            // long.text(data.coord.lon);
+            // weatherData.append(long);
+
+            // var lat = $('<p>');
+            // lat.text(data.coord.lat);
+            // weatherData.append(lat);     
+            
+            //Call from the correct API??
+            function getOneCall () {
+                var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+data.coord.lat+"&lon="+data.coord.lon+"&units=imperial&appid=90f20119a63b80bc6e3ec3b202bae4ee";
+            
+                fetch(oneCallUrl)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                    });
+            }
+            getOneCall();
         });
     };
 
+    
