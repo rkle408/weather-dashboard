@@ -16,8 +16,13 @@ var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
 var weatherData = $('.weather');
-var lat = $('#lat');
-var long = $('#long');
+
+var dateData = $('#dateData');
+var iconData = $('#iconData');
+var temperatureData = $('#temperatureData');
+var humidityData = $('#humidityData');
+var windSpeedData = $('#windSpeedData');
+var uvIndexData =$('#uvIndexData');
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -29,7 +34,6 @@ function displayTime () {
 // Declare time function
 setInterval(displayTime, 1000);
 
-var stored
 
 // Search button saves to local storage
 searchButton.on('click', function (event) { 
@@ -66,21 +70,16 @@ function getCityData() {
         // Need to convert
         .then(function (data) {
             console.log(data);
-   
-         localStorage.setItem("lat", data[0].lat);
-         localStorage.setItem("lon", data[0].lon);
+            var longitude = data[0].lon;
+            var latitude = data[0].lat;
+            getOneCall(latitude, longitude);
 
-
-            getOneCall();
         });
 };
 
-var storedLat = localStorage.getItem("lat");
-var storedLon = localStorage.getItem("lon");
-
 //Call from the correct API??
-function getOneCall () {
-    var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+storedLat+"&lon="+storedLon+"&units=imperial&appid=91f1fde1227ae1ecc713be6b6595cdb2";
+function getOneCall (latitude, longitude) {
+    var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid=90f20119a63b80bc6e3ec3b202bae4ee";
                 
         fetch(oneCallUrl)
             .then(function (response) {
@@ -88,5 +87,11 @@ function getOneCall () {
             })
             .then(function (data) {
                 console.log(data);
+
+                for (var i = 0; i < data.length; i++) {
+                    var cityNameData = $('<p>');
+                    cityNameData.textContent = object.data[0].name;
+                    weatherData.append(cityNameData);
+                };
             });
-}
+};
