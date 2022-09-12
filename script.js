@@ -39,6 +39,8 @@ searchButton.on('click', function (event) {
     
     // Need to make sure API is fetched
     getCityData();
+
+    weatherData.val('');
 });
 
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
@@ -86,12 +88,24 @@ function getOneCall (latitude, longitude) {
             })
             .then(function (data) {
                 console.log(data); // This is an object, doesn't have length property, need to do for-loop for array
-                // forloop to get info here
-                //for (i=0; i < data.current.length; i++) {
-                    var temperatureData = document.createElement("h2");
-                    temperatureData.textContent = "Temperature:" + data.current.temp;
-                    weatherData.append(temperatureData);
-                    console.log("hi!");
-                //}
+                // Display date
+                // NEED TO CONVERT THIS TO REGULAR HUMAN DATE: "dt"
+                var dateData = document.createElement("p");
+                dateData.textContent = data.current.dt;
+                weatherData.append(dateData);
+                
+                // Get and display temp
+                var temperatureData = document.createElement("p");
+                temperatureData.textContent = "Temperature: " + data.current.temp;
+                weatherData.append(temperatureData);
+                // console.log("hi!");
+                
+                // Need icon
+                // Need humidity
+                // Need wind speed
+                // Need UV index
+
+                //5 Day forecast -- data.daily
+                // Need forloop to go through each day
             });
 };

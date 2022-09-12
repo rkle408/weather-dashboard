@@ -74,6 +74,20 @@ button:hover {
     transition: 0.5s;
 }
 
+#citySearch:focus ,
+#citySearchButton:focus {
+    outline: 2px solid var(--lightbrick);
+}
+
+#weather,
+#futureForecast {
+    margin: 10px;
+    background-color: var(--darkblue);
+    color: var(--palepurplebrown);
+    border-radius: 5px;
+    padding: 2px;
+}
+
 /* Media screens! */
 @media screen and (max-width: 992px) {
     h1 {
