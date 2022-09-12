@@ -15,8 +15,8 @@ var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
-var weatherData = $('.weather');
-
+var weatherData = $('#weather');
+console.log(weatherData);
 
 
 function displayTime () {
@@ -85,12 +85,13 @@ function getOneCall (latitude, longitude) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
+                console.log(data); // This is an object, doesn't have length property, need to do for-loop for array
                 // forloop to get info here
-                for (i=0; i < data.length; i++) {
-                    var temperatureData = $('<h2>');
-                    temperatureData.textContent = "Temperature:" + data[0].current[3].daily[0];
+                //for (i=0; i < data.current.length; i++) {
+                    var temperatureData = document.createElement("h2");
+                    temperatureData.textContent = "Temperature:" + data.current.temp;
                     weatherData.append(temperatureData);
-                }
+                    console.log("hi!");
+                //}
             });
 };
