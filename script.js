@@ -17,12 +17,7 @@ var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
 var weatherData = $('.weather');
 
-var dateData = $('#dateData');
-var iconData = $('#iconData');
-var temperatureData = $('#temperatureData');
-var humidityData = $('#humidityData');
-var windSpeedData = $('#windSpeedData');
-var uvIndexData =$('#uvIndexData');
+
 
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -51,16 +46,11 @@ searchButton.on('click', function (event) {
 var storedCities = localStorage.getItem("searchedCity");
 searchHistory.text(storedCities);
 
-
-
-// Need function to get the weather and to display data:
-
+// store as an array, then do a for-loop
 
 //Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
     var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid=90f20119a63b80bc6e3ec3b202bae4ee";
-
-    // Need to figure out how to get user's desired input in the lat and long in the URL above
 
     // Fetch API using the browswer fetch method (no need to worry about linking jquery with AJAX)
     fetch(openWeatherUrl)
@@ -70,14 +60,23 @@ function getCityData() {
         // Need to convert
         .then(function (data) {
             console.log(data);
+
+            // for (i=0; i < data.length; i++) {
+            //     var cityNameData = $('<h2>');
+            //     cityNameData.textContent = data[0].name;
+            //     weatherData.append(cityNameData);
+            //     }
+
             var longitude = data[0].lon;
             var latitude = data[0].lat;
-            getOneCall(latitude, longitude);
 
+            // Insert the values from Geocoding into the One Call API to get the data from here into the other function!!
+            getOneCall(latitude, longitude);
+            
         });
 };
 
-//Call from the correct API??
+//Call from the correct One Call API!! 
 function getOneCall (latitude, longitude) {
     var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid=90f20119a63b80bc6e3ec3b202bae4ee";
                 
@@ -87,11 +86,11 @@ function getOneCall (latitude, longitude) {
             })
             .then(function (data) {
                 console.log(data);
-
-                for (var i = 0; i < data.length; i++) {
-                    var cityNameData = $('<p>');
-                    cityNameData.textContent = object.data[0].name;
-                    weatherData.append(cityNameData);
-                };
+                // // forloop to get daily here
+                // for (i=0; i < data.length; i++) {
+                //     var _____Data = $('<h2>');
+                //     _____Data.textContent = data[0].daily[0];
+                //     weatherData.append(___ata);
+                // }
             });
 };
