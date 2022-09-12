@@ -4,21 +4,20 @@
 // TO DO:
 // Need to fetch weather API
 // NEED TO RENDER THE WEATHER!!!
-// Need to do local storage for user's search history - done
-// Need a functional search bar
+// Need to do local storage for user's search history
+// Need a functional search bar - DONE
 // Need list of city history
 // Create buttons for previous cities in .searchHistoryList
-
 // Add time to header
+
 var timeEl = $('.timeNow');
 var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
 var weatherData = $('#weather');
-console.log(weatherData);
 
-
+// Get time from moment.js, already linked in HTML to be able to use here
 function displayTime () {
     var timeNow = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
     timeEl.text(timeNow);
@@ -26,11 +25,11 @@ function displayTime () {
     //alert("hello");
 }
 
-// Declare time function
+// Declare time function on page load
 setInterval(displayTime, 1000);
 
 
-// Search button saves to local storage
+// Search button saves to local storage AND calls the functions to work once button is clicked
 searchButton.on('click', function (event) { 
     event.preventDefault();
 
@@ -40,7 +39,8 @@ searchButton.on('click', function (event) {
     // Need to make sure API is fetched
     getCityData();
 
-    weatherData.val('');
+    var usersCity = $("#users-city");
+    usersCity.textContent = userCities;
 });
 
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
@@ -78,7 +78,7 @@ function getCityData() {
         });
 };
 
-//Call from the correct One Call API!! 
+//Call from the correct One Call API to get our weather data!! 
 function getOneCall (latitude, longitude) {
     var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid="+API_key;
                 
@@ -87,10 +87,11 @@ function getOneCall (latitude, longitude) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data); // This is an object, doesn't have length property, need to do for-loop for array
+                console.log(data); 
                 // Display date
                 // NEED TO CONVERT THIS TO REGULAR HUMAN DATE: "dt"
-                var dateData = document.createElement("p");
+                // Was using jQuery to createElement, but it didn't render the text to page, only the element
+                var dateData = document.createElement("p"); 
                 dateData.textContent = data.current.dt;
                 weatherData.append(dateData);
                 
@@ -100,12 +101,29 @@ function getOneCall (latitude, longitude) {
                 weatherData.append(temperatureData);
                 // console.log("hi!");
                 
-                // Need icon
-                // Need humidity
-                // Need wind speed
-                // Need UV index
+                // Get and display icon
+                // NEED TO CONVERT TO THE IMAGE...
+                var iconData = document.createElement("p");
+                iconData.textContent = data.current.weather[0].icon;
+                weatherData.append(iconData);
+
+                // Get and display humidity
+                var humidityData = document.createElement("p")
+                humidityData.textContent = "Humidity: " + data.current.humidity;
+                weatherData.append(humidityData);
+
+                // Get and display wind speed
+                var windSpeedData = document.createElement("p");
+                windSpeedData.textContent = "Wind Speed: " + data.current.wind_speed;
+                weatherData.append(windSpeedData);
+
+                // Get and display UV index
+                // NEED TO STYLE UV color with IF 
+                var uvIndexData = document.createElement("p");
+                uvIndexData.textContent = "UV Index: " + data.current.uvi;
+                weatherData.append(uvIndexData);
 
                 //5 Day forecast -- data.daily
-                // Need forloop to go through each day
+                // This is an object, doesn't have length property, need to do for-loop for daily array
             });
 };
