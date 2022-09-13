@@ -33,13 +33,12 @@ setInterval(displayTime, 1000);
 // Search button saves to local storage AND calls the functions to work once button is clicked
 searchButton.on('click', function (event) { 
     event.preventDefault();
-    
     // Need to make sure API is fetched
     getCityData();
     displayPastSearches();
 });
 
-// NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
+// Local Storage 
 var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
 
 // Display past searches
@@ -54,13 +53,11 @@ function displayPastSearches () {
     for (index = 0; index < previousSearch.length; index++) {
         let previousSearches = previousSearch[index];
         console.log(previousSearches);
-        var previous = document.createElement("p");
+        var previous = document.createElement("button");
         previous.textContent = previousSearches;
-        searchHistory.append(previous);    
+        searchHistory.append(previous);
     }
 }
-
-// store as an array, then do a for-loop
 
 //Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
@@ -103,20 +100,12 @@ function getOneCall (latitude, longitude) {
                 // Display date            
                 // NEED TO CONVERT THIS TO REGULAR HUMAN DATE: "dt"
                 // Was using jQuery to createElement, but it didn't render the text to page, only the element
+
                 var dateData = document.createElement("p");
-                // From: https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript, need to look into more!! 
-                // var unixDateData = data.current.dt;
-                // var date = new Date(unixDataData * 1000);
-                // // Hours part from the timestamp
-                // var hours = date.getHours();
-                // // Minutes part from the timestamp
-                // var minutes = "0" + date.getMinutes();
-                // // Seconds part from the timestamp
-                // var seconds = "0" + date.getSeconds();
-                // // Will display time in 10:30:23 format
-                // var formattedTime = hours + ':' + minutes.substring(-2) + ':' + seconds.substring(-2);
-                // console.log(formattedTime);
-                // weatherData.append(dateData);
+                var unixDateData = data.current.dt;
+                var date = moment.unix(unixDateData).format("MM/DD/YYYY");
+                dateData.textContent = date;
+                weatherData.append(dateData);
                 
                 // Get and display temp
                 var temperatureData = document.createElement("p");
@@ -162,9 +151,13 @@ function getOneCall (latitude, longitude) {
                 // This is an object, doesn't have length property, need to do for-loop for daily array
 
                 var dailyForecast = data.daily;
-                    for (index = 0; index < 5; index++) {
+                    for (index = 1; index < 5; index++) {
                         // Date
-                        
+                        var dateForecast = document.createElement("p");
+                        var unixDateForecast = data.daily[index].dt;
+                        var date = moment.unix(unixDateForecast).format("MM/DD/YYYY");
+                        dateForecast.textContent = date;
+                        futureForecast.append(dateForecast);
 
                         // Icon
                         var iconForecast= document.createElement("p");
