@@ -89,8 +89,20 @@ function getOneCall (latitude, longitude) {
                 // Display date            
                 // NEED TO CONVERT THIS TO REGULAR HUMAN DATE: "dt"
                 // Was using jQuery to createElement, but it didn't render the text to page, only the element
-                var dateData = document.createElement("p"); 
-
+                var dateData = document.createElement("p");
+                // From: https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript, need to look into more!! 
+                // var unixDateData = data.current.dt;
+                // var date = new Date(unixDataData * 1000);
+                // // Hours part from the timestamp
+                // var hours = date.getHours();
+                // // Minutes part from the timestamp
+                // var minutes = "0" + date.getMinutes();
+                // // Seconds part from the timestamp
+                // var seconds = "0" + date.getSeconds();
+                // // Will display time in 10:30:23 format
+                // var formattedTime = hours + ':' + minutes.substring(-2) + ':' + seconds.substring(-2);
+                // console.log(formattedTime);
+                // weatherData.append(dateData);
                 
                 // Get and display temp
                 var temperatureData = document.createElement("p");
