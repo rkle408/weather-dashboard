@@ -3,7 +3,7 @@
 ## Utilizing OpenWeather One Call API to render weather data for your city of choice!
 
 
-### Special Notes:
+## Special Notes:
 Had to change the API key after commit #20 due to not being in .gitignore, and they did require a credit card for One Call 3.0 subscription.
 
 UV Index now has 5 classifications of exposure, and I added the background color per their new standards.

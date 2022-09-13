@@ -74,11 +74,9 @@ function getCityData() {
         .then(function (data) {
             console.log(data);
 
-            // for (i=0; i < data.length; i++) {
-            //     var cityNameData = $('<h2>');
-            //     cityNameData.textContent = data[0].name;
-            //     weatherData.append(cityNameData);
-            //     }
+            var cityNameData = document.createElement("h2");
+            cityNameData.textContent = data[0].name;
+            weatherData.append(cityNameData);
 
             var longitude = data[0].lon;
             var latitude = data[0].lat;
@@ -154,7 +152,7 @@ function getOneCall (latitude, longitude) {
                 // This is an object, doesn't have length property, need to do for-loop for daily array
 
                 var dailyForecast = data.daily;
-                    for (index = 1; index < 5; index++) {
+                    for (index = 1; index < 6; index++) {
                         // Date
                         var dateForecast = document.createElement("p");
                         var unixDateForecast = data.daily[index].dt;
