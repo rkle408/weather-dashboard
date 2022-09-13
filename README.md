@@ -1,7 +1,13 @@
 # weather-dashboard
 
 ## Utilizing OpenWeather One Call API to render weather data for your city of choice!
+After only a few days of learning what an API is, what it does, and how significant it is to everyone's everyday life, I was tasked with generating a weather dashboard with the help of OpenWeather One Call's API. 
 
+By building this project, it lets users to get access to weather information concisely by just typing in a city. It will also fetch information for the next 5 days as well. Additionally, users can find more information about the different color values of the UV Index from the EPA, very important in the current focus on health and skin cancer prevention!
+
+I built this project to also test my own knowledge, ability to ask the right questions of my teachers and classmates, and ability to do effective and efficient research on unfamiliar code and APIs! I learned that persistence and perseverance are key to coding. When one function, call, click-event doesn't work... erase it (or comment it out), and try a new pathway! 
+
+My current code certainly is long, repetitive, and therefore tedious, but because of that, I am gaining more knowledge, deeper understanding, and more confidence in my coding abilities every time I build a project. As I gather more and more knowledge of how our older technologies worked in comparison with our current technology, I appreciate how developers of the past made it so much easier to work in today's world.
 
 ## Special Notes:
 Had to change the API key after commit #20 due to not being in .gitignore, and they did require a credit card for One Call 3.0 subscription.
