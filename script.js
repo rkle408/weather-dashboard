@@ -16,6 +16,7 @@ var searchButton = $('#citySearchButton');
 var searchHistory= $('#searchHistoryList');
 var cityName =$('#city-name');
 var weatherData = $('#weather');
+var futureForecast = $('#futureForecast');
 
 // Get time from moment.js, already linked in HTML to be able to use here
 function displayTime () {
@@ -38,9 +39,6 @@ searchButton.on('click', function (event) {
     
     // Need to make sure API is fetched
     getCityData();
-
-    var usersCity = $("#users-city");
-    usersCity.textContent = userCities;
 });
 
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
@@ -89,6 +87,8 @@ function getOneCall (latitude, longitude) {
             .then(function (data) {
                 console.log(data); 
                 // Display date
+                
+                
                 // NEED TO CONVERT THIS TO REGULAR HUMAN DATE: "dt"
                 // Was using jQuery to createElement, but it didn't render the text to page, only the element
                 var dateData = document.createElement("p"); 
@@ -125,5 +125,21 @@ function getOneCall (latitude, longitude) {
 
                 //5 Day forecast -- data.daily
                 // This is an object, doesn't have length property, need to do for-loop for daily array
+
+                var dailyForecast = data.daily;
+                    for (index = 0; index < 5; index++) {
+                        // Date
+                        
+                        // Icon
+                        
+                        // Temperature
+                        var tempForecast = document.createElement("p");
+                        tempForecast.textContent = "Temperature: " + data.daily[index].temp.day;
+                        futureForecast.append(tempForecast);
+
+                        // Wind Speed
+                        
+                        // Humidity
+                    }
             });
 };
