@@ -35,21 +35,24 @@ searchButton.on('click', function (event) {
     event.preventDefault();
     // Need to make sure Geocoding API is fetched, which will then call the getOneCall function
     getCityData();
-
-    // Display previous searches when searchButton is clicked, need info from localStorage
-        var newCity = $('#citySearch').val().trim();
-        // Test: console.log($('#citySearch').val());
-        // Unshift() adds new information to the beginning of the array
-        previousSearch.unshift(newCity);
-        // Test: console.log(previousSearch);
-        localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
-        var previousBtn = document.createElement("button");
-        previousBtn.textContent = newCity;
-        searchHistory.append(previousBtn);
-
+    displayPastSearches();
 });
 
+function displayPastSearches () {
+    // Display previous searches when searchButton is clicked, need info from localStorage
+    var newCity = $('#citySearch').val().trim();
+    // Test: console.log($('#citySearch').val());
+    // Unshift() adds new information to the beginning of the array
+    previousSearch.unshift(newCity);
+    // Test: console.log(previousSearch);
+    localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
+    var previousBtn = document.createElement("button");
+    previousBtn.textContent = newCity;
+    searchHistory.append(previousBtn);
 
+    previousBtn.on('click', // Need to get data for the respective city but it errors...
+    );
+}
 
 // Local Storage 
 var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
@@ -129,13 +132,13 @@ function getOneCall (latitude, longitude) {
                 weatherData.append(uvIndexData);
 
                 // NEED TO STYLE UV color with IF -- done
-                if (data.current.uvi < 3) {
+                if (data.current.uvi <= 2 ) {
                     $(uvIndexData).addClass("green");
-                } else if (data.current.uvi > 2 && data.current.uvi < 6) {
+                } else if (data.current.uvi > 2 && data.current.uvi <= 5) {
                     $(uvIndexData).addClass("yellow");
-                } else if (data.current.uvi > 5 && data.current.uvi < 8) {
+                } else if (data.current.uvi > 5 && data.current.uvi <= 7) {
                     $(uvIndexData).addClass("orange");
-                } else if (data.current.uvi > 7 && data.current.uvi <11) {
+                } else if (data.current.uvi > 7 && data.current.uvi <= 10) {
                     $(uvIndexData).addClass("red");
                 } else {
                     $(uvIndexData).addClass("violet");
