@@ -83,10 +83,31 @@ button:hover {
 #futureForecast p {
     font-size: 20px;
     margin: 10px;
-    background-color: var(--darkblue);
-    color: var(--palepurplebrown);
     border-radius: 5px;
     padding: 2px;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.violet {
+    background-color: violet;
+    color: white;
 }
 
 /* Media screens! */

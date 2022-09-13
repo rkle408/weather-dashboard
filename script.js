@@ -42,6 +42,7 @@ searchButton.on('click', function (event) {
 });
 
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
+
 // Display past searches
 var storedCities = localStorage.getItem("searchedCity");
 searchHistory.text(storedCities);
@@ -127,10 +128,22 @@ function getOneCall (latitude, longitude) {
                 weatherData.append(windSpeedData);
 
                 // Get and display UV index
-                // NEED TO STYLE UV color with IF 
                 var uvIndexData = document.createElement("p");
                 uvIndexData.textContent = "UV Index: " + data.current.uvi;
                 weatherData.append(uvIndexData);
+
+                // NEED TO STYLE UV color with IF -- done
+                if (data.current.uvi < 3) {
+                    $(uvIndexData).addClass("green");
+                } else if (data.current.uvi > 2 && data.current.uvi < 6) {
+                    $(uvIndexData).addClass("yellow");
+                } else if (data.current.uvi > 5 && data.current.uvi < 8) {
+                    $(uvIndexData).addClass("orange");
+                } else if (data.current.uvi > 7 && data.current.uvi <11) {
+                    $(uvIndexData).addClass("red");
+                } else {
+                    $(uvIndexData).addClass("violet");
+                }
 
                 //5 Day forecast -- data.daily
                 // This is an object, doesn't have length property, need to do for-loop for daily array
