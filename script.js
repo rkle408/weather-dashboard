@@ -13,7 +13,7 @@
 var timeEl = $('.timeNow');
 var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
-var searchHistory= $('#searchHistoryList');
+var searchHistory = $('#searchHistoryList');
 var cityName =$('#city-name');
 var weatherData = $('#weather');
 var futureForecast = $('#futureForecast');
@@ -33,19 +33,32 @@ setInterval(displayTime, 1000);
 // Search button saves to local storage AND calls the functions to work once button is clicked
 searchButton.on('click', function (event) { 
     event.preventDefault();
-
-    console.log(userCities.val());
-    localStorage.setItem("searchedCity", userCities.val());
     
     // Need to make sure API is fetched
     getCityData();
+    displayPastSearches();
 });
 
 // NEED TO FIGURE OUT HOW TO SAVE ALL INDIVIDUAL SEARCHES AND DISPLAY AS BUTTONS
+var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
 
 // Display past searches
-var storedCities = localStorage.getItem("searchedCity");
-searchHistory.text(storedCities);
+function displayPastSearches () {
+    var newCity = $('#citySearch').val().trim();
+    // Test: console.log($('#citySearch').val());
+    // Unshift() adds new information to the beginning of the array
+    previousSearch.unshift(newCity);
+    // Test: console.log(previousSearch);
+    localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
+    
+    for (index = 0; index < previousSearch.length; index++) {
+        let previousSearches = previousSearch[index];
+        console.log(previousSearches);
+        var previous = document.createElement("p");
+        previous.textContent = previousSearches;
+        searchHistory.append(previous);    
+    }
+}
 
 // store as an array, then do a for-loop
 
