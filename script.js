@@ -86,18 +86,15 @@ function getOneCall (latitude, longitude) {
             })
             .then(function (data) {
                 console.log(data); 
-                // Display date
-                
-                
+                // Display date            
                 // NEED TO CONVERT THIS TO REGULAR HUMAN DATE: "dt"
                 // Was using jQuery to createElement, but it didn't render the text to page, only the element
                 var dateData = document.createElement("p"); 
-                dateData.textContent = data.current.dt;
-                weatherData.append(dateData);
+
                 
                 // Get and display temp
                 var temperatureData = document.createElement("p");
-                temperatureData.textContent = "Temperature: " + data.current.temp;
+                temperatureData.textContent = "Temperature: " + data.current.temp + " °F";
                 weatherData.append(temperatureData);
                 // console.log("hi!");
                 
@@ -109,12 +106,12 @@ function getOneCall (latitude, longitude) {
 
                 // Get and display humidity
                 var humidityData = document.createElement("p")
-                humidityData.textContent = "Humidity: " + data.current.humidity;
+                humidityData.textContent = "Humidity: " + data.current.humidity + "%";
                 weatherData.append(humidityData);
 
                 // Get and display wind speed
                 var windSpeedData = document.createElement("p");
-                windSpeedData.textContent = "Wind Speed: " + data.current.wind_speed;
+                windSpeedData.textContent = "Wind Speed: " + data.current.wind_speed + " mph";
                 weatherData.append(windSpeedData);
 
                 // Get and display UV index
@@ -130,16 +127,26 @@ function getOneCall (latitude, longitude) {
                     for (index = 0; index < 5; index++) {
                         // Date
                         
+
                         // Icon
+                        var iconForecast= document.createElement("p");
+                        iconForecast.textContent = data.daily[index].weather.icon;
+                        futureForecast.append(iconForecast);
                         
                         // Temperature
                         var tempForecast = document.createElement("p");
-                        tempForecast.textContent = "Temperature: " + data.daily[index].temp.day;
+                        tempForecast.textContent = "Temperature: " + data.daily[index].temp.day + " °F";
                         futureForecast.append(tempForecast);
 
                         // Wind Speed
-                        
+                        var windSpeedForecast = document.createElement("p");
+                        windSpeedForecast.textContent = "Wind Speed: " + data.daily[index].wind_speed + " mph";
+                        futureForecast.append(windSpeedForecast);
+
                         // Humidity
+                        var humidityForecast = document.createElement("p");
+                        humidityForecast.textContent = "Humidity: " + data.daily[index].humidity + "%";
+                        futureForecast.append(humidityForecast);
                     }
             });
 };
