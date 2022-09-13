@@ -26,7 +26,7 @@ h1 {
 
 h2 {
     font-size: 25px;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .timeNow {
@@ -39,7 +39,7 @@ h2 {
     width: 350px;
     background-color: var(--lightgraywhite);
     position: absolute;
-    height: 100%;
+    height: auto;
     overflow: auto;
     border-radius: 5px;
     line-height: 40px;
@@ -50,7 +50,7 @@ main {
     padding: 10px;
     margin-left: 400px;
     padding: 2px 16px;
-    height: 1000px;
+    height: auto;
     border-radius: 5px;
     background-color: var(--paletan);
 }
@@ -84,35 +84,49 @@ button:hover {
     outline: 2px solid var(--lightbrick);
 }
 
+#weather,
+#futureForecast {
+    background-color: var(--palepurplebrown);
+    border-radius: 5px;
+    display: inline-grid;
+
+    margin: 20px;
+}
+
 #weather p,
 #futureForecast p {
-    font-size: 20px;
+    font-size: 25px;
     margin: 10px;
-    border-radius: 5px;
     padding: 2px;
+    display: inline-block;
 }
 
 .green {
     background-color: green;
     color: white;
+    border-radius: 5px;
 }
 
 .yellow {
     background-color: yellow;
+    border-radius: 5px;
 }
 
 .orange {
     background-color: orange;
+    border-radius: 5px;
 }
 
 .red {
     background-color: red;
     color: white;
+    border-radius: 5px;
 }
 
 .violet {
     background-color: violet;
     color: white;
+    border-radius: 5px;
 }
 
 /* Media screens! */
