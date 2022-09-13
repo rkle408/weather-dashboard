@@ -68,6 +68,11 @@ button {
     border-radius: 20px;
 }
 
+a {
+    font-size: 20px;
+}
+
+a:hover,
 button:hover {
     cursor: pointer;
     background-color: var(--lightbrick);

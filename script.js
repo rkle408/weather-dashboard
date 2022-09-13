@@ -2,13 +2,15 @@
 // alert("hello");
 
 // TO DO:
-// Need to fetch weather API
-// NEED TO RENDER THE WEATHER!!!
-// Need to do local storage for user's search history
-// Need a functional search bar - DONE
-// Need list of city history
-// Create buttons for previous cities in .searchHistoryList
-// Add time to header
+// Need to fetch weather API -- Done
+// NEED TO RENDER THE WEATHER!!! -- Done
+// Need to do local storage for user's search history -- Done
+// Need a functional search bar -- Done
+// Need list of city history -- Done
+// Create buttons for previous cities in .searchHistoryList -- Needs to be functional buttons!
+// Add time to header -- Done
+
+
 
 var timeEl = $('.timeNow');
 var userCities = $('#citySearch');
@@ -107,17 +109,18 @@ function getOneCall (latitude, longitude) {
                 dateData.textContent = date;
                 weatherData.append(dateData);
                 
+                // Get and display icon
+                // NEED TO CONVERT TO THE IMAGE...
+                var iconData = document.createElement("img");
+                var iconImage = data.current.weather[0].icon;
+                iconData.src = "http://openweathermap.org/img/wn/"+iconImage+".png";
+                weatherData.append(iconData);
+
                 // Get and display temp
                 var temperatureData = document.createElement("p");
                 temperatureData.textContent = "Temperature: " + data.current.temp + " °F";
                 weatherData.append(temperatureData);
                 // console.log("hi!");
-                
-                // Get and display icon
-                // NEED TO CONVERT TO THE IMAGE...
-                var iconData = document.createElement("p");
-                iconData.textContent = data.current.weather[0].icon;
-                weatherData.append(iconData);
 
                 // Get and display humidity
                 var humidityData = document.createElement("p")
@@ -160,8 +163,10 @@ function getOneCall (latitude, longitude) {
                         futureForecast.append(dateForecast);
 
                         // Icon
-                        var iconForecast= document.createElement("p");
-                        iconForecast.textContent = data.daily[index].weather.icon;
+                        var iconForecast = document.createElement("img");
+                        var iconForecastImage = data.daily[index].weather[0].icon;
+                        //console.log(iconForecastImage);
+                        iconForecast.src = "http://openweathermap.org/img/wn/"+iconForecastImage+".png";
                         futureForecast.append(iconForecast);
                         
                         // Temperature
@@ -169,15 +174,15 @@ function getOneCall (latitude, longitude) {
                         tempForecast.textContent = "Temperature: " + data.daily[index].temp.day + " °F";
                         futureForecast.append(tempForecast);
 
-                        // Wind Speed
-                        var windSpeedForecast = document.createElement("p");
-                        windSpeedForecast.textContent = "Wind Speed: " + data.daily[index].wind_speed + " mph";
-                        futureForecast.append(windSpeedForecast);
-
                         // Humidity
                         var humidityForecast = document.createElement("p");
                         humidityForecast.textContent = "Humidity: " + data.daily[index].humidity + "%";
                         futureForecast.append(humidityForecast);
+
+                        // Wind Speed
+                        var windSpeedForecast = document.createElement("p");
+                        windSpeedForecast.textContent = "Wind Speed: " + data.daily[index].wind_speed + " mph";
+                        futureForecast.append(windSpeedForecast);
                     }
             });
 };
