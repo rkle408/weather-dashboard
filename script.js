@@ -10,8 +10,6 @@
 // Create buttons for previous cities in .searchHistoryList -- Needs to be functional buttons!
 // Add time to header -- Done
 
-
-
 var timeEl = $('.timeNow');
 var userCities = $('#citySearch');
 var searchButton = $('#citySearchButton');
@@ -35,31 +33,26 @@ setInterval(displayTime, 1000);
 // Search button saves to local storage AND calls the functions to work once button is clicked
 searchButton.on('click', function (event) { 
     event.preventDefault();
-    // Need to make sure API is fetched
+    // Need to make sure Geocoding API is fetched, which will then call the getOneCall function
     getCityData();
-    displayPastSearches();
+
+    // Display previous searches when searchButton is clicked, need info from localStorage
+        var newCity = $('#citySearch').val().trim();
+        // Test: console.log($('#citySearch').val());
+        // Unshift() adds new information to the beginning of the array
+        previousSearch.unshift(newCity);
+        // Test: console.log(previousSearch);
+        localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
+        var previousBtn = document.createElement("button");
+        previousBtn.textContent = newCity;
+        searchHistory.append(previousBtn);
+
 });
+
+
 
 // Local Storage 
 var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
-
-// Display past searches
-function displayPastSearches () {
-    var newCity = $('#citySearch').val().trim();
-    // Test: console.log($('#citySearch').val());
-    // Unshift() adds new information to the beginning of the array
-    previousSearch.unshift(newCity);
-    // Test: console.log(previousSearch);
-    localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
-    
-    for (index = 0; index < previousSearch.length; index++) {
-        let previousSearches = previousSearch[index];
-        console.log(previousSearches);
-        var previous = document.createElement("button");
-        previous.textContent = previousSearches;
-        searchHistory.append(previous);
-    }
-}
 
 //Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
@@ -150,7 +143,6 @@ function getOneCall (latitude, longitude) {
 
                 //5 Day forecast -- data.daily
                 // This is an object, doesn't have length property, need to do for-loop for daily array
-
                 var dailyForecast = data.daily;
                     for (index = 1; index < 6; index++) {
                         // Date
