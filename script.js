@@ -40,27 +40,6 @@ searchButton.on('click', function (event) {
     futureForecast.empty();
 });
 
-function displayPastSearches () {
-    // Display previous searches when searchButton is clicked, need info from localStorage
-    var newCity = $('#citySearch').val().trim();
-    // Test: console.log($('#citySearch').val());
-    // Unshift() adds new information to the beginning of the array
-    previousSearch.unshift(newCity);
-    // Test: console.log(previousSearch);
-    localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
-    var previousBtn = document.createElement("button");
-    // Should have a setAttribute on the button
-    previousBtn.setAttribute("class", newCity);
-    previousBtn.textContent = newCity;
-    searchHistory.append(previousBtn);
-
-    // var second = this.dataset.search;
-    // previousBtn.addEventListener('click', function(event) {
-    //     console.log(event.target);
-    //     getCityData(second);
-  //  });
-}
-
 // Create variable that holds event.target, which is going to tell which element triggered the event
 // Hopefully will be a button!
 // Create another variable that will use variable with event.target, will reach in and get the attribute set earlier
@@ -200,3 +179,55 @@ function getOneCall (latitude, longitude) {
                     }
             });
 };
+
+function displayPastSearches () {
+    // Display previous searches when searchButton is clicked, need info from localStorage
+    var newCity = $('#citySearch').val().trim();
+    // Test: console.log($('#citySearch').val());
+    // Unshift() adds new information to the beginning of the array
+    previousSearch.unshift(newCity);
+    // Test: console.log(previousSearch);
+    localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
+    var previousBtn = document.createElement("button");
+    // Should have a setAttribute on the button
+    previousBtn.setAttribute("data-search", newCity);
+    previousBtn.setAttribute("class", "previous");
+    previousBtn.textContent = newCity;
+    searchHistory.append(previousBtn);
+
+    previousBtn.addEventListener('click', function(event) {
+        var x = event.target;
+        console.log(x);
+        var z = x.getAttribute('data-search');
+        console.log(z);
+        weatherData.empty();
+        futureForecast.empty();
+        
+        // Need to create a function that allows previousBtn value to be inserted into the URL to be called...
+        function getCityData2() {
+            var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+z+"&limit=5&appid="+API_key;
+        
+            fetch(openWeatherUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                // Need to convert
+                .then(function (data) {
+                    console.log(data);
+        
+                    var cityNameData = document.createElement("h2");
+                    cityNameData.textContent = data[0].name;
+                    weatherData.append(cityNameData);
+        
+                    var longitude = data[0].lon;
+                    var latitude = data[0].lat;
+
+                    getOneCall(latitude, longitude);
+                    
+                });
+           
+        };
+        getCityData2();
+   });
+
+}
