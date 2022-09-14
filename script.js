@@ -205,7 +205,7 @@ function displayPastSearches () {
         
         // Need to create a function that allows previousBtn value to be inserted into the URL to be called...
         function getCityData2() {
-            var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+z+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
+            var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+z+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
         
             fetch(openWeatherUrl)
                 .then(function (response) {
