@@ -52,7 +52,7 @@ var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
 
 //Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
-    var openWeatherUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
+    var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
 
     // Fetch API using the browswer fetch method (no need to worry about linking jquery with AJAX)
     fetch(openWeatherUrl)
