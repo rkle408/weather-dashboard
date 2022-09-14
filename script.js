@@ -50,19 +50,23 @@ function displayPastSearches () {
     localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
     var previousBtn = document.createElement("button");
     // Should have a setAttribute on the button
-    previousBtn.setAttribute("data-search", newCity);
+    previousBtn.setAttribute("class", newCity);
     previousBtn.textContent = newCity;
     searchHistory.append(previousBtn);
+
+    // var second = this.dataset.search;
+    // previousBtn.addEventListener('click', function(event) {
+    //     console.log(event.target);
+    //     getCityData(second);
+  //  });
 }
 
-//searchHistory.addEventListener('click', function(event){
 // Create variable that holds event.target, which is going to tell which element triggered the event
 // Hopefully will be a button!
 // Create another variable that will use variable with event.target, will reach in and get the attribute set earlier
 // First variable is getting the element that triggered event = button
 // Second variable is getting datasearch of that button, which should be the city name
 // Using second variable, can call your functions that display the data
-//});
 
 // Local Storage 
 var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
@@ -153,10 +157,6 @@ function getOneCall (latitude, longitude) {
                 } else {
                     $(uvIndexData).addClass("violet");
                 }
-
-                // Need to figure out where to place empty()
-                // 
-
 
                 //5 Day forecast -- data.daily
                 // This is an object, doesn't have length property, need to do for-loop for daily array
