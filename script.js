@@ -164,34 +164,39 @@ function getOneCall (latitude, longitude) {
                     for (index = 1; index < 6; index++) {
                         // Create a div here, then append to p this div, then div into the HTML
                         // Add class to div to style
+                        var separateWeather = document.createElement("section");
+                        separateWeather.classList.add("separate");
+
                         // Date
                         var dateForecast = document.createElement("p");
                         var unixDateForecast = data.daily[index].dt;
                         var date = moment.unix(unixDateForecast).format("MM/DD/YYYY");
-                        dateForecast.textContent = date;
-                        futureForecast.append(dateForecast);
+                        dateForecast.textContent = date +": ";
+                        separateWeather.append(dateForecast);
 
                         // Icon
                         var iconForecast = document.createElement("img");
                         var iconForecastImage = data.daily[index].weather[0].icon;
                         //console.log(iconForecastImage);
                         iconForecast.src = "http://openweathermap.org/img/wn/"+iconForecastImage+".png";
-                        futureForecast.append(iconForecast);
+                        separateWeather.append(iconForecast);
                         
                         // Temperature
                         var tempForecast = document.createElement("p");
                         tempForecast.textContent = "Temperature: " + data.daily[index].temp.day + " °F";
-                        futureForecast.append(tempForecast);
+                        separateWeather.append(tempForecast);
 
                         // Humidity
                         var humidityForecast = document.createElement("p");
                         humidityForecast.textContent = "Humidity: " + data.daily[index].humidity + "%";
-                        futureForecast.append(humidityForecast);
+                        separateWeather.append(humidityForecast);
 
                         // Wind Speed
                         var windSpeedForecast = document.createElement("p");
                         windSpeedForecast.textContent = "Wind Speed: " + data.daily[index].wind_speed + " mph";
-                        futureForecast.append(windSpeedForecast);
+                        separateWeather.append(windSpeedForecast);
+
+                        futureForecast.append(separateWeather);
                     }
             });
 };
