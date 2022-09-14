@@ -33,9 +33,11 @@ setInterval(displayTime, 1000);
 // Search button saves to local storage AND calls the functions to work once button is clicked
 searchButton.on('click', function (event) { 
     event.preventDefault();
+    displayPastSearches();
     // Need to make sure Geocoding API is fetched, which will then call the getOneCall function
     getCityData();
-    displayPastSearches();
+    weatherData.empty();
+    futureForecast.empty();
 });
 
 function displayPastSearches () {
@@ -47,12 +49,20 @@ function displayPastSearches () {
     // Test: console.log(previousSearch);
     localStorage.setItem("previousSearches", JSON.stringify(previousSearch));
     var previousBtn = document.createElement("button");
+    // Should have a setAttribute on the button
+    previousBtn.setAttribute("data-search", newCity);
     previousBtn.textContent = newCity;
     searchHistory.append(previousBtn);
-
-    previousBtn.on('click', // Need to get data for the respective city but it errors...
-    );
 }
+
+//searchHistory.addEventListener('click', function(event){
+// Create variable that holds event.target, which is going to tell which element triggered the event
+// Hopefully will be a button!
+// Create another variable that will use variable with event.target, will reach in and get the attribute set earlier
+// First variable is getting the element that triggered event = button
+// Second variable is getting datasearch of that button, which should be the city name
+// Using second variable, can call your functions that display the data
+//});
 
 // Local Storage 
 var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
@@ -144,10 +154,16 @@ function getOneCall (latitude, longitude) {
                     $(uvIndexData).addClass("violet");
                 }
 
+                // Need to figure out where to place empty()
+                // 
+
+
                 //5 Day forecast -- data.daily
                 // This is an object, doesn't have length property, need to do for-loop for daily array
                 var dailyForecast = data.daily;
                     for (index = 1; index < 6; index++) {
+                        // Create a div here, then append to p this div, then div into the HTML
+                        // Add class to div to style
                         // Date
                         var dateForecast = document.createElement("p");
                         var unixDateForecast = data.daily[index].dt;
