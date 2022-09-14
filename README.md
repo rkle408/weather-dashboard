@@ -17,7 +17,7 @@ UV Index now has 5 classifications of exposure, and I added the background color
 ### Deploy website: <https://rkle408.github.io/weather-dashboard/>
 
 ## Screenshot:
-
+![screencapture1](https://user-images.githubusercontent.com/108099192/190074552-d1c5ee72-35c8-405c-b04d-8e667eaf6504.png)
 
 ## Resources:
 - Desrosiers, J. "Fetch API and OpenWeatherMaps API." <https://www.youtube.com/watch?v=Mc1w6Q-nxzM>. Accessed: September 10, 2022.
