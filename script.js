@@ -196,16 +196,17 @@ function displayPastSearches () {
     searchHistory.append(previousBtn);
 
     previousBtn.addEventListener('click', function(event) {
-        var x = event.target;
-        console.log(x);
-        var z = x.getAttribute('data-search');
-        console.log(z);
+        var clickPrevButton = event.target;
+        console.log(clickPrevButton);
+        var namePrevCity = clickPrevButton.getAttribute('data-search');
+        console.log(namePrevCity);
+        // Need to empty data to show previous cities!
         weatherData.empty();
         futureForecast.empty();
         
         // Need to create a function that allows previousBtn value to be inserted into the URL to be called...
         function getCityData2() {
-            var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+z+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
+            var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+namePrevCity+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
         
             fetch(openWeatherUrl)
                 .then(function (response) {
