@@ -52,7 +52,7 @@ var previousSearch = JSON.parse(localStorage.getItem("previousSearches")) || [];
 
 //Need a function to convert city name to lat and lon due to One Call
 function getCityData() {
-    var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
+    var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+userCities.val()+"&limit=5&appid="+API_key;
 
     // Fetch API using the browswer fetch method (no need to worry about linking jquery with AJAX)
     fetch(openWeatherUrl)
@@ -78,7 +78,7 @@ function getCityData() {
 
 //Call from the correct One Call API to get our weather data!! 
 function getOneCall (latitude, longitude) {
-    var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid=187ae0e1907618a73a372dd383d6fdda";
+    var oneCallUrl = "https://api.openweathermap.org/data/3.0/onecall?lat="+latitude+"&lon="+longitude+"&units=imperial&appid="+API_key;
                 
         fetch(oneCallUrl)
             .then(function (response) {
@@ -206,7 +206,7 @@ function displayPastSearches () {
         
         // Need to create a function that allows previousBtn value to be inserted into the URL to be called...
         function getCityData2() {
-            var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+namePrevCity+"&limit=5&appid=187ae0e1907618a73a372dd383d6fdda";
+            var openWeatherUrl = "https://api.openweathermap.org/geo/1.0/direct?q="+namePrevCity+"&limit=5&appid="+API_key;
         
             fetch(openWeatherUrl)
                 .then(function (response) {
